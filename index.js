@@ -130,33 +130,22 @@ function clickMultiplicacion() {
 }
 
 function clickRetroceder() {
-        resultado = 0;
-        actual = 0;
         actualElemento.innerHTML = "0";
         resultadoElemento.innerHTML = "0";
-        removeClick();
+        retrocederClick();
 }
 
 function clickEliminar() {
     resultado = 0;
-    actual = 0;
+    actual = "";
     actualElemento.innerHTML = "0";
     resultadoElemento.innerHTML = "0";
 }
 
-function removeClick() {
-    document.getElementById("botonUno").removeEventListener("click", clickUno);
-    document.getElementById("botonDos").removeEventListener("click", clickDos);
-    document.getElementById("botonTres").removeEventListener("click", clickTres);
-    document.getElementById("botonCuatro").removeEventListener("click", clickCuatro);
-    document.getElementById("botonCinco").removeEventListener("click", clickCinco);
-    document.getElementById("botonSeis").removeEventListener("click", clickSeis);
-    document.getElementById("botonSiete").removeEventListener("click", clickSiete);
-    document.getElementById("botonOcho").removeEventListener("click", clickOcho);
-    document.getElementById("botonNueve").removeEventListener("click", clickNueve);
-    document.getElementById("botonCero").removeEventListener("click", clickCero);
-    document.getElementById("suma").removeEventListener("click", clickSuma);
-    document.getElementById("resta").removeEventListener("click", clickResta);
-    document.getElementById("division").removeEventListener("click", clickDivision);
-    document.getElementById("mult").removeEventListener("click", clickMultiplicacion);
+function retrocederClick(){
+    cifras=actual.length;               //Número de caracteres en pantalla
+    br=actual.substr(cifras-1,cifras)   //Identificar último caracter
+    actual=actual.substr(0,cifras-1)    //Quitar el ultimo caracter
+    if (actual=="") {actual="0";}       //Si ya no quedan caracteres, colocar 0
+    actualElemento.innerHTML=actual;    //Mostrar resultado en pantalla	
 }
