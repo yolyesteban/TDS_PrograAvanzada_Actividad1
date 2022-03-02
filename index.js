@@ -16,6 +16,7 @@ document.getElementById("division").addEventListener("click", clickDivision);
 document.getElementById("mult").addEventListener("click", clickMultiplicacion);
 document.getElementById("retroceder").addEventListener("click", clickRetroceder);
 document.getElementById("eliminar").addEventListener("click", clickEliminar);
+document.getElementById("igual").addEventListener("click",clickIgual);
 
 mousetrap.bind("1", clickUno);
 mousetrap.bind("2", clickDos);
@@ -33,11 +34,14 @@ mousetrap.bind("/", clickDivision);
 mousetrap.bind("*", clickMultiplicacion);
 mousetrap.bind("backspace", clickRetroceder);
 mousetrap.bind("del", clickEliminar);
+mousetrap.bind("enter", clickIgual);
+mousetrap.bind("=", clickIgual);
 
 var actualElemento = document.getElementById("numeroActual");
 var resultadoElemento = document.getElementById("resultado");
 var actual = "";
 var resultado = 0;
+var operacion ="no"; // "no" =  sin operación.
 
 function clickUno() {
     actual += 1;
@@ -89,10 +93,11 @@ function clickCero() {
     actualElemento.innerHTML = actual;
 }
 
+
 function clickSuma() {
+    operacion="+";
     if (actual != "") {
         resultado += parseInt(actual);
-
         actual = "";
         actualElemento.innerHTML = "0";
         resultadoElemento.innerHTML = resultado;
@@ -100,32 +105,86 @@ function clickSuma() {
 }
 
 function clickResta() {
+    operacion="-";
     if (actual != "") {
-        resultado -= parseInt(actual);
-
-        actual = "";
-        actualElemento.innerHTML = "0";
-        resultadoElemento.innerHTML = resultado;
+        if (resultado != "") {
+            resultado -= parseInt(actual);
+            actual = "";
+            actualElemento.innerHTML = "0";
+            resultadoElemento.innerHTML = resultado;
+        }
+        else {
+            resultado = parseInt(actual);
+            actual = "";
+            actualElemento.innerHTML = "0";
+            resultadoElemento.innerHTML = resultado;
+        }
     }
 }
 
 function clickDivision() {
+    operacion="/";
     if (actual != "") {
-        resultado /= parseInt(actual);
-
-        actual = "";
-        actualElemento.innerHTML = "0";
-        resultadoElemento.innerHTML = resultado;
+        if (resultado != "") {
+            resultado /= parseInt(actual);
+            actual = "";
+            actualElemento.innerHTML = "0";
+            resultadoElemento.innerHTML = resultado;
+        }
+        else {
+            resultado = parseInt(actual);
+            actual = "";
+            actualElemento.innerHTML = "0";
+            resultadoElemento.innerHTML = resultado;
+        }
     }
 }
 
 function clickMultiplicacion() {
+    operacion="*";
     if (actual != "") {
-        resultado *= parseInt(actual);
+        if (resultado != "") {
+            resultado *= parseInt(actual);
+            actual = "";
+            actualElemento.innerHTML = "0";
+            resultadoElemento.innerHTML = resultado;
+        }
+        else {
+            resultado = parseInt(actual);
+            actual = "";
+            actualElemento.innerHTML = "0";
+            resultadoElemento.innerHTML = resultado;
+        }
+    }
+}
 
-        actual = "";
-        actualElemento.innerHTML = "0";
-        resultadoElemento.innerHTML = resultado;
+function clickIgual() {
+    if (actual != "") {
+        if (operacion=="no") {
+            actualElemento.innerHTML = "0";
+            resultadoElemento.innerHTML = actual;
+        }
+        else{
+            switch (operacion) {
+                case "+":
+                    resultado += parseInt(actual);
+                    break;
+                case "-":
+                    resultado -= parseInt(actual);
+                    break;
+                case "*":
+                    resultado *= parseInt(actual);
+                    break; 
+                case "/":
+                    resultado /= parseInt(actual);
+                    break;                                                   
+                default:
+                    break;
+            }
+            actual = "";
+            actualElemento.innerHTML = "0";
+            resultadoElemento.innerHTML = resultado;
+        }
     }
 }
 

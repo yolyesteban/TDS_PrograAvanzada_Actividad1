@@ -6,8 +6,8 @@ function createWindow() {
     height: 530,
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false,
-    },
+      contextIsolation: false
+    }
   });
   ventana.loadFile("index.html");
 }
