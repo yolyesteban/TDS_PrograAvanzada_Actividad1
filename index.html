@@ -11,9 +11,9 @@
       <div class="numeroDisplay" id="resultado">0</div>
       <div id="botones">
 
-        <button class="botonOp" id="retroceder">R</button>
+        <button class="botonOp" id="retroceder">«</button>
         <button class="botonOp" id="eliminar">C</button>
-        <button class="botonOp" id="historial">H</button>
+        <button class="botonOp" id="historial"><img src="https://img.icons8.com/officexs/30/000000/order-history.png"/></button>
         <button class="botonOp" id="igual">=</button>
 
         <button class="botonCalc" id="botonSiete">7</button>
@@ -39,7 +39,15 @@
       <br/>
 
     </div>
-
+    <div id="historyContainer" >
+      <div id="historyHeader">
+        <div> <header > <h1>Historial</h1></header> </div>
+        <div><button class="botonBack" id="botonBackCalculadora">«</button></div>
+      </div>
+      <br>
+      <div><p>Operaciones:</p><hr></div>
+      <div id="operationsContainer"></div>
+    </div>
     <script type="text/javascript" src="./index.js"></script>
   </body>
 </html>

@@ -17,6 +17,8 @@ document.getElementById("mult").addEventListener("click", clickMultiplicacion);
 document.getElementById("retroceder").addEventListener("click", clickRetroceder);
 document.getElementById("eliminar").addEventListener("click", clickEliminar);
 document.getElementById("igual").addEventListener("click",clickIgual);
+document.getElementById("historial").addEventListener("click",clickHistorial);
+document.getElementById("botonBackCalculadora").addEventListener("click",clickBackCalculadora);
 
 mousetrap.bind("1", clickUno);
 mousetrap.bind("2", clickDos);
@@ -42,6 +44,7 @@ var resultadoElemento = document.getElementById("resultado");
 var actual = "";
 var resultado = 0;
 var operacion ="no"; // "no" =  sin operación.
+var cadena = "";
 
 function clickUno() {
     actual += 1;
@@ -168,15 +171,19 @@ function clickIgual() {
             switch (operacion) {
                 case "+":
                     resultado += parseInt(actual);
+                    guardarHistorial();
                     break;
                 case "-":
                     resultado -= parseInt(actual);
+                    guardarHistorial();
                     break;
                 case "*":
                     resultado *= parseInt(actual);
+                    guardarHistorial();
                     break; 
                 case "/":
                     resultado /= parseInt(actual);
+                    guardarHistorial();
                     break;                                                   
                 default:
                     break;
@@ -207,4 +214,25 @@ function retrocederClick(){
     actual=actual.substr(0,cifras-1)    //Quitar el ultimo caracter
     if (actual=="") {actual="0";}       //Si ya no quedan caracteres, colocar 0
     actualElemento.innerHTML=actual;    //Mostrar resultado en pantalla	
+}
+
+function guardarHistorial(){
+    cadena += resultadoElemento.innerHTML + operacion + actualElemento.innerHTML + " = " + resultado + "<br/>";
+    document.getElementById('operationsContainer').innerHTML = cadena;
+}
+
+function clickHistorial(){
+    document.getElementById("calculadora").style.visibility = 'hidden';
+    document.getElementById("historyContainer").style.visibility = 'visible';
+}
+
+function clickBackCalculadora(){
+    document.getElementById("calculadora").style.visibility = 'visible' ;
+    document.getElementById("historyContainer").style.visibility = 'hidden';
+}
+
+window.addEventListener('load', init, false);
+function init() {
+    let div = document.querySelector('#historyContainer');
+    div.style.visibility = 'hidden';
 }
